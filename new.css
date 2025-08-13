@@ -1,0 +1,144 @@
+/* Sky gradient animation */
+@keyframes skyShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Stars twinkling */
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Stars moving */
+@keyframes starDrift {
+    0% { background-position: 0 0; }
+    100% { background-position: -300px 300px; }
+}
+
+/* Moon drifting */
+@keyframes moonDrift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-70px); }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Moving night sky gradient */
+    background: linear-gradient(-45deg, #020024, #090979, #1b2735, #000000);
+    background-size: 400% 400%;
+    animation: skyShift 60s ease infinite;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Stars layer */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 300%;
+    height: 300%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: starDrift 180s linear infinite, twinkle 2s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+/* Moon layer */
+body::after {
+    content: "";
+    position: absolute;
+    top: 80px;
+    right: 100px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fff 60%, #ccc 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 25px rgba(255,255,255,0.8);
+    animation: moonDrift 40s ease-in-out infinite;
+    z-index: 1;
+}
+
+/* Card Styling */
+#card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px 50px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    background: radial-gradient(circle, #e92107, transparent);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Hover Glow */
+#card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 30px rgba(2, 2, 2, 0.8);
+}
+
+/* Click Pulse Animation */
+#card:active {
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* Clock Styling */
+#clock {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 15px;
+    animation: fadeIn 1.5s ease forwards;
+    transition: transform 0.2s ease;
+}
+
+/* Clock Bounce on Hover */
+#clock:hover {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+/* Message Styling */
+#message {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #f5f3f5;
+    animation: fadeInUp 1.5s ease forwards;
+    transition: text-shadow 0.3s ease;
+}
+
+/* Glow when touched */
+#message:hover {
+    text-shadow: 0 0 8px #080108, 0 0 15px #ff66ff;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Fade-in from bottom */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
